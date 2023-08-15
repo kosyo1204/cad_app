@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ペン機能の実装</title>
+  <style>
+    /* キャンバスとボタンを中央に配置するためのスタイル */
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 10px;
+    }
+    .button-group {
+      margin: 10px;
+      display: flex;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      background-color: #f0f0f0;
+    }
+    label {
+      margin-right: 5px;
+    }
+    input[type="color"] {
+      height: 28px;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="range"] {
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-group">
+    <label for="colorPicker">ペンと図形のボーダー色:</label>
+    <input type="color" id="colorPicker" value="#000000">
+  </div>
+  <div class="button-group">
+    <label for="color2">図形の中の色:</label>
+    <input type="color" id="color2" value="#ffffff">
+  </div>
+  <div class="button-group">
+    <label for="penWidth">ペンの太さ:</label>
+    <input type="range" id="penWidth" min="1" max="20" value="5">
+  </div>
+  <div class="button-group">
+    <button id="eraserButton">消しゴム</button>
+    <button id="penButton">ペン</button>
+    <button id="rectangleButton">四角形</button>
+    <button id="circleButton">円</button>
+    <button id="heartButton">ハート</button>
+    <button id="undoButton">戻る</button>
+    <button id="saveButton">保存</button>
+    <button id="resetButton">全リセット</button>
+  </div>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script src="./index.ts"></script>
+</body>
+</html>
+
