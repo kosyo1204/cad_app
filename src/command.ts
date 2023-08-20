@@ -13,7 +13,7 @@ class AddShapeCommand implements Command {
     this.drawingArea.addShape();
   }
   undo(){
-    console.log('undoadd');
+    this.drawingArea.removeShape();
   };
 }
 
@@ -27,7 +27,7 @@ class RemoveShapeCommand implements Command {
     this.drawingArea.removeShape();
   }
   undo(){
-    console.log('undoremove');
+    this.drawingArea.addShape();
   };
 }
 
