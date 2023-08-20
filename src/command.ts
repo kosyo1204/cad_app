@@ -4,7 +4,7 @@ interface Command {
 }
 
 // コマンドの内容を実装する具象クラス
-export class AddShapeCommand implements Command {
+class AddShapeCommand implements Command {
   private drawingArea: DrawingArea;
   constructor(drawingArea: DrawingArea) {
     this.drawingArea = drawingArea;
@@ -12,11 +12,13 @@ export class AddShapeCommand implements Command {
   execute() {
     this.drawingArea.addShape();
   }
-  undo(){};
+  undo(){
+    console.log('undoadd');
+  };
 }
 
 // コマンドの内容を実装する具象クラス
-export class RemoveShapeCommand implements Command {
+class RemoveShapeCommand implements Command {
   private drawingArea: DrawingArea;
   constructor(drawingArea: DrawingArea) {
     this.drawingArea = drawingArea;
@@ -24,10 +26,12 @@ export class RemoveShapeCommand implements Command {
   execute() {
     this.drawingArea.removeShape();
   }
-  undo(){};
+  undo(){
+    console.log('undoremove');
+  };
 }
 
-export class DrawingArea {
+class DrawingArea {
   // コマンドを受ける対象に実装されたメソッドは具象クラスから呼び出す
   addShape() {
     console.log('addShape');
@@ -76,6 +80,7 @@ export class CAD {
   private readonly _undoButton : HTMLButtonElement;
   private readonly _redoButton : HTMLButtonElement;
   private commandManager: CommandManager;
+  private drawingArea: DrawingArea;
 
   constructor(document: Document) {
     this._addShapeButton = document.getElementById('addShapeButton') as HTMLButtonElement;
@@ -84,16 +89,15 @@ export class CAD {
     this._redoButton = document.getElementById('redoButton') as HTMLButtonElement;
 
     this.commandManager = new CommandManager();
+    this.drawingArea = new DrawingArea();
 
     this._addShapeButton.addEventListener('click', () => {
-      const drawingArea = new DrawingArea();
-      const addShapeCommand = new AddShapeCommand(drawingArea);
+      const addShapeCommand = new AddShapeCommand(this.drawingArea);
       this.commandManager.execute(addShapeCommand);
     });
 
     this._removeShapeButton.addEventListener('click', () => {
-      const drawingArea = new DrawingArea();
-      const removeShapeCommand = new RemoveShapeCommand(drawingArea);
+      const removeShapeCommand = new RemoveShapeCommand(this.drawingArea);
       this.commandManager.execute(removeShapeCommand);
     });
 
