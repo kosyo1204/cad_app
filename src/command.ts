@@ -58,6 +58,7 @@ class CommandManager {
   undo(): void {
     // 最後に実行したコマンドを取り出す
     const command = this.history.pop();
+    
     // コマンドがあれば実行
     if (command) {
       command.undo();
